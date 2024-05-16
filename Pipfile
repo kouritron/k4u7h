@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 cryptography = "*"
-# tornado = "*"
+tornado = "*"
 fastapi = "*"
 uvicorn = {extras = ["standard"], version = "*"}
 
