@@ -1,0 +1,4 @@
+{
+    "files.defaultLanguage": "plaintext",
+    "python.analysis.extraPaths": ["./src_api"],
+}
