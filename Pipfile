@@ -6,8 +6,8 @@ name = "pypi"
 [packages]
 cryptography = "*"
 tornado = "*"
-fastapi = "*"
-uvicorn = {extras = ["standard"], version = "*"}
+# fastapi = "*"
+# uvicorn = {extras = ["standard"], version = "*"}
 
 [dev-packages]
 pylint = "*"
