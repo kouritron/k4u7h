@@ -1,0 +1,24 @@
+{
+    "private": true,
+    "main": "index.js",
+    "engineStrict": true,
+    "engines": {
+        "node": "~20.13.1",
+        "npm": "~10.5.2"
+    },
+    "scripts": {
+        "build": "bash scriptz/bundle_ui.sh",
+        "start": "bash scriptz/serve_ui.sh"
+    },
+    "devDependencies": {
+        "dotenv": "16.4.5"
+    },
+    "dependencies": {
+        "axios": "1.6.8",
+        "react": "18.3.1",
+        "react-dom": "18.3.1",
+        "react-router": "6.23.1",
+        "react-router-dom": "6.23.1",
+        "uuid": "9.0.1"
+    }
+}
