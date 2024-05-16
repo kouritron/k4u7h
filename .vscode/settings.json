@@ -1,4 +1,14 @@
 {
+    "files.exclude": {
+        "**/.git": true,
+        "**/__pycache__": true,
+        "**/node_modules": true,
+    },
+    "search.exclude": {
+        "**/.git": true,
+        "**/__pycache__": true,
+        "**/node_modules": true,
+    },
     "files.defaultLanguage": "plaintext",
     "python.analysis.extraPaths": ["./src_api"],
 }
