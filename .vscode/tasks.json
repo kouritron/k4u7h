@@ -4,14 +4,46 @@
     "version": "2.0.0",
     "tasks": [
         // -------------------------------------------------------------------------------------------------------------
-        // -------------------------------------------------------------------------------------------------------------
+        // ----------------------------------------------------------------------------------------------------- scriptz
         {
-            "label": "bundle_ui",
+            "label": "scriptz: bundle_ui",
             "type": "process",
             "command": "bash",
             "args": [
                 "-c",
-                "clear && ${workspaceFolder}/scriptz/bundle_ui.sh"
+                "${workspaceFolder}/scriptz/bundle_ui.sh"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true,
+                "showReuseMessage": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "scriptz: serve_ui",
+            "type": "process",
+            "command": "bash",
+            "args": [
+                "-c",
+                "${workspaceFolder}/scriptz/serve_ui.sh"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true,
+                "showReuseMessage": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "scriptz: dbg_curl",
+            "type": "process",
+            "command": "bash",
+            "args": [
+                "-c",
+                "${workspaceFolder}/scriptz/dbg_curl.sh"
             ],
             "presentation": {
                 "reveal": "always",
@@ -24,12 +56,17 @@
         // -------------------------------------------------------------------------------------------------------------
         // -------------------------------------------------------------------------------------------------------------
         {
-            "label": "serve_ui",
+            "label": "serve k4",
             "type": "process",
+            "options": {
+                "env": {
+                    "PYTHONPATH": "${workspaceFolder}/src_api"
+                }
+            },
             "command": "bash",
             "args": [
                 "-c",
-                "clear && ${workspaceFolder}/scriptz/serve_ui.sh"
+                "cd ${workspaceFolder}/src_api && pipenv run python3 serve_k4.py"
             ],
             "presentation": {
                 "reveal": "always",
