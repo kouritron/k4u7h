@@ -15,7 +15,9 @@
             ],
             "presentation": {
                 "reveal": "always",
-                "panel": "dedicated"
+                "panel": "dedicated",
+                "clear": true,
+                "showReuseMessage": false
             },
             "problemMatcher": []
         },
@@ -31,7 +33,9 @@
             ],
             "presentation": {
                 "reveal": "always",
-                "panel": "dedicated"
+                "panel": "dedicated",
+                "clear": true,
+                "showReuseMessage": false
             },
             "problemMatcher": []
         },
@@ -51,7 +55,32 @@
             ],
             "presentation": {
                 "reveal": "always",
-                "panel": "shared"
+                "panel": "shared",
+                "clear": true,
+                "showReuseMessage": false
+            },
+            "problemMatcher": []
+        },
+        // -------------------------------------------------------------------------------------------------------------
+        // -------------------------------------------------------------------------------------------------------------
+        {
+            "label": "run current file in pipenv",
+            "type": "process",
+            "options": {
+                "env": {
+                    "PYTHONPATH": "${workspaceFolder}/src_api"
+                }
+            },
+            "command": "bash",
+            "args": [
+                "-c",
+                "pipenv run python3 ${file}"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true,
+                "showReuseMessage": false
             },
             "problemMatcher": []
         }
