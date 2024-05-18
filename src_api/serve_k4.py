@@ -7,14 +7,14 @@ import tornado.httpserver as tserver
 import tornado.web as tweb
 from tornado.ioloop import IOLoop
 
-from libk4u7h.logutilz import simple_log as log
 from libk4u7h import paramz
+from libk4u7h.logutilz import simple_log as log
 
 
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
 def main():
-    log.info(f"0====>>>>> serve_k4.py: starting 1 proc server ...\n")
+    log.info(f"*** serve_k4.py: starting 1 proc server ...\n")
 
     app = tweb.Application([], debug=False)
 
