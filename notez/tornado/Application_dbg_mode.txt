@@ -1,0 +1,40 @@
+
+from tornado.web import Application
+
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+app = Application(  [..... list of routes ....],  debug=False)
+
+# debug mode is not relevant to logging issues.
+
+# these things happen in debug mode (code copied from tornado source):
+if self.settings.get("debug"):
+    self.settings.setdefault("autoreload", True)
+    self.settings.setdefault("compiled_template_cache", False)
+    self.settings.setdefault("static_hash_cache", False)
+    self.settings.setdefault("serve_traceback", True)
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+from libk4u7h.logutilz import ANSI_COLORS
+
+import tornado.log as tlog
+
+
+    tlog.enable_pretty_logging()
+
+    # --------------- make tornado log in color
+    lgfmt = logging.Formatter(f"{ANSI_COLORS.YELLOW}|%(name)s:%(levelname)s|%(message)s {ANSI_COLORS.RESET}")
+    logging.getLogger().handlers[0].setFormatter(lgfmt)
+
+
+
+
+
