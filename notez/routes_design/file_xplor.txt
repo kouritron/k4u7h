@@ -41,7 +41,7 @@ POST /fx/listdir  --data '{"path": "/tmp/"}'
 
 
 👎 this is not good. json path, no reloading, browser warning about re-POST
-👎 we still need to do some escaping encoding, cant allow JSON inside JSON.
+👎 we still need to do some escaping and/or encoding, cant allow JSON inside JSON.
 
 
 
