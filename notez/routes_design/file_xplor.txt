@@ -1,0 +1,62 @@
+
+file_xplor.py should expose sufficient routes such that a react UI can build a file explorer off of it.
+
+
+👍👍👍👍👍
+👎👎👎👎👎
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+
+put everything under
+....api..../fx/
+
+
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# os.listdir() equivalent
+
+
+# -------------- option 1:
+
+GET /fx/listdir?path=/tmp/
+
+👎 not very good, GET implies cachable, but this might change by others, altho we can set not cachable HEADER
+👎 Also not good to expose system paths into URLs, allowed chars are different too between OS and URL
+
+
+# -------------- option 2:
+👍 now a hex encoded path in get params might work
+
+GET /fx/listdir?path=2f746d702f
+
+2f746d702f -> /tmp/
+
+
+
+# -------------- option 3:
+POST /fx/listdir  --data '{"path": "/tmp/"}'
+
+
+👎 this is not good. json path, no reloading, browser warning about re-POST
+👎 we still need to do some escaping encoding, cant allow JSON inside JSON.
+
+
+
+# --------------  Go with option 2,
+- use p shorthand for path
+- use hex encoding for safe transport and also because hex is more readable ASCII than base64 which completely changes
+
+
+
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
