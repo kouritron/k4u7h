@@ -120,6 +120,25 @@
                 "showReuseMessage": false
             },
             "problemMatcher": []
-        }
+        },
+        // -------------------------------------------------------------------------------------------------------------
+        // -------------------------------------------------------------------------------------------------------------
+        {
+            "label": "git add current file",
+            "type": "process",
+            "command": "bash",
+            "args": [
+                "-c",
+                "git add ${file}"
+            ],
+            "presentation": {
+                "reveal": "silent",
+                "panel": "dedicated",
+                "focus": false,
+                "clear": false,
+                "showReuseMessage": false
+            },
+            "problemMatcher": []
+        },
     ]
 }
