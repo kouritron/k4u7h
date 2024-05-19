@@ -22,7 +22,7 @@ STATIC_DIR_PATH = (REPO_ROOT_PATH / 'build_tmp' / 'static').resolve()
 
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
-# A tiny sleep between autoreloads might be useful. 
+# A tiny sleep between autoreloads is useful. Also gives a visual cue of the reload.
 sp.call("clear", shell=True)
 time.sleep(.3)
 
