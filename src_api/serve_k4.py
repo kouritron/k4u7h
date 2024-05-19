@@ -12,7 +12,6 @@ from libk4u7h import paramz
 from libk4u7h import k4routes
 
 
-
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
 def main():
@@ -20,11 +19,14 @@ def main():
 
     exposed_routes = [
         (r"/", k4routes.core.IndexHandler),
+        (r"/static/(.*)", tweb.StaticFileHandler, {
+            "path": str(paramz.STATIC_DIR_PATH)
+        }),
     ]
 
     app = tweb.Application(exposed_routes, debug=paramz.TORNADO_DEBUG_MODE)
 
-    # starting server this way works well w. both single and multi process. just pass the number of pids. 
+    # starting server this way works well w. both single and multi process. Just pass the number of pids.
     http_server = tserver.HTTPServer(app)
     http_server.bind(paramz.K4_DEFAULT_PORT)
     http_server.start(1)
