@@ -10,6 +10,15 @@ cd $REPO_ROOT
 # to see help for POST
 # curl -h POST
 
+
+# -i or --include to see headers and extra info
+# -L or --location  to follow redirects
+
+# --head for HTTP HEAD method
+# --get should be same -X GET
+
+
+
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
 
@@ -17,14 +26,14 @@ cd $REPO_ROOT
 
 
 
-# curl -X GET http://127.0.0.1:15980/
-# curl -X GET http://127.0.0.1:15980/static/k4u7h_ui_bundle.js
+# curl --get http://127.0.0.1:15980/
+# curl --get http://127.0.0.1:15980/static/k4u7h_ui_bundle.js
 
 
 # curl --head http://127.0.0.1:15980/static/k4u7h_ui_bundle.js
 # curl --head http://127.0.0.1:15980/favicon.ico
 
-curl -X GET http://127.0.0.1:15980/favicon.ico
+curl --get --include http://127.0.0.1:15980/favicon.ico
 
 
 
