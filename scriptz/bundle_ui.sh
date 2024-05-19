@@ -15,6 +15,7 @@ mkdir -p $REPO_ROOT/build_tmp/static
 
 cp $REPO_ROOT/src_ui/index.html $REPO_ROOT/build_tmp/index.html 
 cp $REPO_ROOT/src_ui/assets/favicon.ico $REPO_ROOT/build_tmp/favicon.ico
+cp $REPO_ROOT/src_ui/assets/favicon.ico $REPO_ROOT/build_tmp/static/favicon.ico
 
 
 

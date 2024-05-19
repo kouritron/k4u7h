@@ -17,7 +17,15 @@ cd $REPO_ROOT
 
 
 
-curl -X GET http://127.0.0.1:15980/
+# curl -X GET http://127.0.0.1:15980/
+# curl -X GET http://127.0.0.1:15980/static/k4u7h_ui_bundle.js
+
+
+# curl --head http://127.0.0.1:15980/static/k4u7h_ui_bundle.js
+# curl --head http://127.0.0.1:15980/favicon.ico
+
+curl -X GET http://127.0.0.1:15980/favicon.ico
+
 
 
 # curl -X POST http://127.0.0.1:15980/ -H "Content-Type: application/json" --data '{"p1": "foo", "p2": "bar"}'
