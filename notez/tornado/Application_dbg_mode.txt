@@ -37,4 +37,38 @@ import tornado.log as tlog
 
 
 
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# this is best.
+
+tor_settings = {
+    # Enables debug mode for better error messages
+    "debug": True,
+    "autoreload": False,
+}
+
+
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# other options exist if you are curious but those two are most useful
+
+tor_settings = {
+    # Enables debug mode for better error messages and auto-reload
+    "debug": True,
+
+    # "static_path": "static",  # Directory for serving static files
+    # "template_path": "templates",  # Directory for Tornado templates
+    # "cookie_secret": "YOUR_SECRET_KEY",  # Secret key for secure cookies
+    # "xsrf_cookies": True,  # Enable XSRF protection
+    # "login_url": "/login",  # URL to redirect to for login
+    
+    # Automatically reload the server when code changes (typically for development)
+    "autoreload": False,
+
+    # Enables response compression
+    "compress_response": True,
+}
+
 
