@@ -2,39 +2,60 @@ import time
 
 from libk4u7h.logutilz import ANSI_COLORS
 
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+_ALWAYS_FLUSH = True
+_TS_FLOAT_DIGITS = 0
+
 
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
 def dbg(*args):
 
-    msg = f"INFO|{time.time():.4f}|"
-    msg += ", ".join([str(arg) for arg in args])
+    curr_ts = int(time.time() * (10**_TS_FLOAT_DIGITS)) / float(10**_TS_FLOAT_DIGITS)
+    if 0 == _TS_FLOAT_DIGITS:
+        curr_ts = int(curr_ts)
+    curr_ts_str = f"{curr_ts}"
 
-    print(msg)
+    msg = f"DBG|{curr_ts_str}|"
+    msg += ", ".join([str(arg) for arg in args])
+    print(msg, flush=_ALWAYS_FLUSH)
 
 
 def info(*args):
 
-    msg = f"INFO|{time.time():.4f}|"
-    msg += ", ".join([str(arg) for arg in args])
+    curr_ts = int(time.time() * (10**_TS_FLOAT_DIGITS)) / float(10**_TS_FLOAT_DIGITS)
+    if 0 == _TS_FLOAT_DIGITS:
+        curr_ts = int(curr_ts)
+    curr_ts_str = f"{curr_ts}"
 
-    print(ANSI_COLORS.GREEN + msg + ANSI_COLORS.RESET)
+    msg = f"INFO|{curr_ts_str}|"
+    msg += ", ".join([str(arg) for arg in args])
+    print(ANSI_COLORS.GREEN + msg + ANSI_COLORS.RESET, flush=_ALWAYS_FLUSH)
 
 
 def warn(*args):
 
-    msg = f"INFO|{time.time():.4f}|"
-    msg += ", ".join([str(arg) for arg in args])
+    curr_ts = int(time.time() * (10**_TS_FLOAT_DIGITS)) / float(10**_TS_FLOAT_DIGITS)
+    if 0 == _TS_FLOAT_DIGITS:
+        curr_ts = int(curr_ts)
+    curr_ts_str = f"{curr_ts}"
 
-    print(ANSI_COLORS.YELLOW + msg + ANSI_COLORS.RESET)
+    msg = f"WARN|{curr_ts_str}|"
+    msg += ", ".join([str(arg) for arg in args])
+    print(ANSI_COLORS.YELLOW + msg + ANSI_COLORS.RESET, flush=_ALWAYS_FLUSH)
 
 
 def error(*args):
 
-    msg = f"INFO|{time.time():.4f}|"
-    msg += ", ".join([str(arg) for arg in args])
+    curr_ts = int(time.time() * (10**_TS_FLOAT_DIGITS)) / float(10**_TS_FLOAT_DIGITS)
+    if 0 == _TS_FLOAT_DIGITS:
+        curr_ts = int(curr_ts)
+    curr_ts_str = f"{curr_ts}"
 
-    print(ANSI_COLORS.RED + msg + ANSI_COLORS.RESET)
+    msg = f"ERROR|{curr_ts_str}|"
+    msg += ", ".join([str(arg) for arg in args])
+    print(ANSI_COLORS.RED + msg + ANSI_COLORS.RESET, flush=_ALWAYS_FLUSH)
 
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -42,12 +63,6 @@ def error(*args):
 def main():
     dbg("dbggggg")
     info("dassa", 231, 312.21, "dssa")
-
-    for _ in range(42999):
-        13 * 3131
-
-    warn("WARRRRRRRRRRRRRN----------")
-    error("0==================[];;;;;;;;;;;>>>>>>")
 
 
 if '__main__' == __name__:
