@@ -1,0 +1,43 @@
+exposed_routes = [ ..... ]
+
+
+# add this to above routes :
+
+(r"/static/(.*)", tweb.StaticFileHandler, {"path": str(paramz.STATIC_DIR_PATH)})
+
+This was confirmed to work.
+
+
+
+# --------------------------------- this might work
+
+    tor_settings = {
+        "static_path": "static",  # Directory for serving static files
+    }
+
+    app = tweb.Application(exposed_routes, **tor_settings)
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+favicon got tricky given the static file handler behavior. just redirect it.
+
+
+
+class RedirectFaviconHandler(K4BaseHandler):
+
+    def get(self):
+        self.redirect("/static/favicon.ico")
+
+
+# ---- and then add route
+(r"/favicon\.ico",   k4routes.redirections.RedirectFaviconHandler),
+
+
+# --- you can test with
+curl --get --include --location http://127.0.0.1:15980/favicon.ico
+
+# --include show headers
+# --location to follow redirects
+
+
