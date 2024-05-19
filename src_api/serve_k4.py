@@ -22,6 +22,9 @@ def main():
         (r"/static/(.*)", tweb.StaticFileHandler, {
             "path": str(paramz.STATIC_DIR_PATH)
         }),
+        (r"/(favicon\.ico)", tweb.StaticFileHandler, {
+            "path": str(paramz.FAVICON_PATH)
+        }),
     ]
 
     app = tweb.Application(exposed_routes, debug=paramz.TORNADO_DEBUG_MODE)
