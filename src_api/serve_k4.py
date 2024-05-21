@@ -5,6 +5,7 @@ import logging
 
 import tornado.web as tweb
 import tornado.httpserver as tserver
+import tornado.log as tlog
 from tornado.ioloop import IOLoop as TorIOLoop
 
 from libk4u7.logutilz import simple_log as log
@@ -17,10 +18,17 @@ from libk4u7 import k4routes
 def init_3rd_party_loggers():
     """ Enable/disable loggers from tornado and/or other packages outside libk4u7 """
 
-    logging.getLogger("tornado.application").setLevel(logging.INFO)
-    logging.getLogger("tornado.general").setLevel(logging.INFO)
-    logging.getLogger("tornado.access").setLevel(logging.INFO)
-    logging.getLogger("tornado").setLevel(logging.INFO)
+    # --------------- enable tornado logs
+    tlog.enable_pretty_logging()
+
+    # this sets the formatter on the root logger's handler, which will apply to everyone by default.
+    fmt = logging.Formatter(f"{log.ANSI_COLORS.CYAN}|%(name)s:%(levelname)s|%(message)s {log.ANSI_COLORS.RESET}")
+    logging.getLogger().handlers[0].setFormatter(fmt)
+
+    logging.getLogger("tornado.application").setLevel(logging.DEBUG)
+    logging.getLogger("tornado.general").setLevel(logging.DEBUG)
+    logging.getLogger("tornado.access").setLevel(logging.DEBUG)
+    # logging.getLogger("tornado").setLevel(logging.INFO)
 
     loggers_list = [logging.getLogger(name) for name in logging.root.manager.loggerDict]
     for x in loggers_list:
@@ -57,7 +65,8 @@ def main():
     k4app = tweb.Application(exposed_routes, **tor_settings)
 
     # ----- start listening
-    log.info(f"\n\n\n*** serve_k4.py: starting 1 proc server ...\n")
+    print('\n', flush=True)
+    log.info(f"*** serve_k4.py: starting 1 proc server ...\n\n")
 
     # This works fine w/ both single and multi process servers.
     # Just pass the number of pids to start()
