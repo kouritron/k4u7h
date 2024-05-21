@@ -11,8 +11,10 @@ class K4BaseHandler(tweb.RequestHandler):
 
     def initialize(self):
 
-
         self.req_start_time = time.time()
+
+        log.dbg(f"New K4BaseHandler created.")
+
         self.set_header("Access-Control-Max-Age", "1000")
 
 

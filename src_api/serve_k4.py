@@ -7,15 +7,31 @@ import tornado.web as tweb
 import tornado.httpserver as tserver
 from tornado.ioloop import IOLoop
 
-from libk4u7h.logutilz import simple_log as log
-from libk4u7h import paramz
-from libk4u7h import k4routes
+from libk4u7.logutilz import simple_log as log
+from libk4u7 import paramz
+from libk4u7 import k4routes
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+def init_3rd_party_loggers():
+    """ Enable/disable loggers from tornado and/or other packages outside libk4u7 """
+    
+    loggers_list = [logging.getLogger(name) for name in logging.root.manager.loggerDict]
+    for x in loggers_list:
+        print(x)
+
+    
+    # print(logging.getLogger("tornado.application").disabled)
+    # logging.getLogger("tornado.application").disabled = True
 
 
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
 def main():
     log.info(f"*** serve_k4.py: starting 1 proc server ...\n")
+
+    init_3rd_party_loggers()
 
     tor_settings = {
         # Enable debug mode for better error messages, disable useless autoreload.
