@@ -10,11 +10,11 @@ function my_start() {
 
     // function component
     var Home = () => {
-        return <div>k4u7h homepage</div>;
+        return <div>k4u7 homepage</div>;
     }
 
 
-    const app_container = document.getElementById('k4u7h_app');
+    const app_container = document.getElementById('k4u7_app');
     const react_root = createRoot(app_container);
     react_root.render(<Home />);
 }
