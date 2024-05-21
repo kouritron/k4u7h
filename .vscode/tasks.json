@@ -2,79 +2,65 @@
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
     "version": "2.0.0",
+    // -----------------------------------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+    // You could supply an inputs array sibling to "tasks"
+    // "inputs": [
+    //     {
+    //         "id": "todays_color",
+    //         "type": "pickString",
+    //         "description": "Select color",
+    //         "options": ["Blue", "Green", "Red"]
+    //     }
+    // ],
+    // -----
+    // and now put this task inside tasks array to use that input.
+    // {
+    //     "label": "Echo todays_color",
+    //     "type": "shell",
+    //     "command": "echo Today is: ${input:todays_color}",
+    // },
+    // -----------------------------------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
+    // this will apply to all tasks. each task can supply its own presentation to override.
+    "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true,
+        "showReuseMessage": false
+    },
+    // -----------------------------------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
     "tasks": [
         // -------------------------------------------------------------------------------------------------------------
         // ----------------------------------------------------------------------------------------------------- scriptz
         {
             "label": "scriptz: bundle_ui",
-            "type": "process",
-            "command": "bash",
-            "args": [
-                "-c",
-                "${workspaceFolder}/scriptz/bundle_ui.sh"
-            ],
-            "presentation": {
-                "reveal": "always",
-                "panel": "dedicated",
-                "clear": true,
-                "showReuseMessage": false
-            },
-            "problemMatcher": []
+            "type": "shell",
+            "command": "${workspaceFolder}/scriptz/bundle_ui.sh",
         },
         {
             "label": "scriptz: serve_ui",
-            "type": "process",
-            "command": "bash",
-            "args": [
-                "-c",
-                "${workspaceFolder}/scriptz/serve_ui.sh"
-            ],
-            "presentation": {
-                "reveal": "always",
-                "panel": "dedicated",
-                "clear": true,
-                "showReuseMessage": false
-            },
-            "problemMatcher": []
+            "type": "shell",
+            "command": "${workspaceFolder}/scriptz/serve_ui.sh",
         },
         {
             "label": "scriptz: dbg_curl",
-            "type": "process",
-            "command": "bash",
-            "args": [
-                "-c",
-                "${workspaceFolder}/scriptz/dbg_curl.sh"
-            ],
-            "presentation": {
-                "reveal": "always",
-                "panel": "dedicated",
-                "clear": true,
-                "showReuseMessage": false
-            },
-            "problemMatcher": []
+            "type": "shell",
+            "command": "${workspaceFolder}/scriptz/dbg_curl.sh",
         },
         // -------------------------------------------------------------------------------------------------------------
         // -------------------------------------------------------------------------------------------------------------
         {
             "label": "serve k4",
-            "type": "process",
+            "type": "shell",
             "options": {
                 "env": {
                     "PYTHONPATH": "${workspaceFolder}/src_api"
-                }
+                },
+                "cwd": "${workspaceFolder}/src_api"
             },
-            "command": "bash",
-            "args": [
-                "-c",
-                "cd ${workspaceFolder}/src_api && pipenv run python3 serve_k4.py"
-            ],
-            "presentation": {
-                "reveal": "always",
-                "panel": "dedicated",
-                "clear": true,
-                "showReuseMessage": false
-            },
-            "problemMatcher": []
+            "command": "pipenv run python3 serve_k4.py",
         },
         // -------------------------------------------------------------------------------------------------------------
         // -------------------------------------------------------------------------------------------------------------
@@ -102,43 +88,30 @@
         // -------------------------------------------------------------------------------------------------------------
         {
             "label": "run current file in pipenv",
-            "type": "process",
+            "type": "shell",
             "options": {
                 "env": {
                     "PYTHONPATH": "${workspaceFolder}/src_api"
                 }
             },
-            "command": "bash",
-            "args": [
-                "-c",
-                "pipenv run python3 ${file}"
-            ],
+            "command": "pipenv run python3 ${file}",
             "presentation": {
-                "reveal": "always",
                 "panel": "shared",
-                "clear": true,
-                "showReuseMessage": false
-            },
-            "problemMatcher": []
+            }
         },
         // -------------------------------------------------------------------------------------------------------------
         // -------------------------------------------------------------------------------------------------------------
         {
             "label": "git add current file",
-            "type": "process",
-            "command": "bash",
-            "args": [
-                "-c",
-                "git add ${file}"
-            ],
+            "type": "shell",
+            "command": "git add ${file}",
             "presentation": {
                 "reveal": "silent",
                 "panel": "dedicated",
                 "focus": false,
                 "clear": false,
                 "showReuseMessage": false
-            },
-            "problemMatcher": []
-        },
+            }
+        }
     ]
 }
