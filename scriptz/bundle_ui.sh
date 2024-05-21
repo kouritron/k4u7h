@@ -28,7 +28,7 @@ cd $REPO_ROOT/src_ui
 # for prod minify
 # esbuild app.jsx --bundle --minify --target=chrome85,firefox80
 
-esbuild app.jsx --bundle --sourcemap --outfile=$REPO_ROOT/build_tmp/static/k4u7h_ui_bundle.js
+esbuild app.jsx --bundle --sourcemap --outfile=$REPO_ROOT/build_tmp/static/k4u7_ui_bundle.js
 
 
 

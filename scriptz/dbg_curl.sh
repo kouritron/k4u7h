@@ -27,10 +27,10 @@ cd $REPO_ROOT
 
 
 # curl --get http://127.0.0.1:15980/
-# curl --get http://127.0.0.1:15980/static/k4u7h_ui_bundle.js
+# curl --get http://127.0.0.1:15980/static/k4u7_ui_bundle.js
 
 
-# curl --head http://127.0.0.1:15980/static/k4u7h_ui_bundle.js
+# curl --head http://127.0.0.1:15980/static/k4u7_ui_bundle.js
 # curl --head http://127.0.0.1:15980/favicon.ico
 
 curl --get --include --location http://127.0.0.1:15980/favicon.ico
