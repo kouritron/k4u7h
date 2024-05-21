@@ -1,5 +1,6 @@
 #!/bin/bash
-
+# set -x for debugging
+# set -e would exit as soon as first non-zero is encountered.
 
 # K4 default port: 159_80
 
@@ -33,7 +34,8 @@ cd $REPO_ROOT
 # curl --head http://127.0.0.1:15980/static/k4u7_ui_bundle.js
 # curl --head http://127.0.0.1:15980/favicon.ico
 
-curl --get --include --location http://127.0.0.1:15980/favicon.ico
+# curl --get --include --location http://127.0.0.1:15980/favicon.ico
+curl --get --include --location http://127.0.0.1:15980/
 
 
 
@@ -43,7 +45,7 @@ curl --get --include --location http://127.0.0.1:15980/favicon.ico
 
 
 
-
+exit 0
 
 
 # ----------------------------------------------------------------------------------------------------------------------

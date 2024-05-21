@@ -20,9 +20,10 @@ def main222():
 
 def main():
 
-    REPO_ROOT=sp.check_output("git rev-parse --show-toplevel", shell=True).decode()
+    # REPO_ROOT=sp.check_output("git rev-parse --show-toplevel", shell=True).decode()
+    # print(REPO_ROOT)
 
-    print(REPO_ROOT)
+    print('AAAAAAABBBBBBBBBBBBB')
 
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
