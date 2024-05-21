@@ -12,10 +12,20 @@
             "console": "integratedTerminal",
             "env": {
                 "PYTHONPATH": "${workspaceFolder}/src_api"
-            }
-            // if true vscode remains in your src files when stepping. no jumping to stdlib or other packages
+            },
             // "justMyCode": true
-
+        },
+        {
+            "name": "Python Debugger: serve_k4",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/src_api/serve_k4.py",
+            "console": "integratedTerminal",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/src_api"
+            },
+            // if true vscode remains in your src files when stepping. no jumping to stdlib or other packages
+            "justMyCode": true
         }
     ]
 }
