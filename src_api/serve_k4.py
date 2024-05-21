@@ -22,9 +22,9 @@ def init_3rd_party_loggers():
     logging.getLogger("tornado.access").setLevel(logging.INFO)
     logging.getLogger("tornado").setLevel(logging.INFO)
 
-    # loggers_list = [logging.getLogger(name) for name in logging.root.manager.loggerDict]
-    # for x in loggers_list:
-    #     print(x)
+    loggers_list = [logging.getLogger(name) for name in logging.root.manager.loggerDict]
+    for x in loggers_list:
+        print(x)
 
     # by default most are enabled, and set to WARNING level. Some of the loggers:
     # concurrent concurrent.futures asyncio tornado.access tornado tornado.application tornado.general
@@ -57,7 +57,7 @@ def main():
     k4app = tweb.Application(exposed_routes, **tor_settings)
 
     # ----- start listening
-    log.info(f"*** serve_k4.py: starting 1 proc server ...\n")
+    log.info(f"\n\n\n*** serve_k4.py: starting 1 proc server ...\n")
 
     # This works fine w/ both single and multi process servers.
     # Just pass the number of pids to start()
