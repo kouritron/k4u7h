@@ -1,0 +1,114 @@
+
+👍👍👍👍👍
+👎👎👎👎👎
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------- initialize() explained
+
+In Tornado, a RequestHandler is created per incoming HTTP request. 
+
+👍 do use the initialize(self) method, but only in the bare form (just self argument).
+👍 Forget about passing along extra params to it.
+
+
+👎
+
+
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------- initialize() extra paramz
+
+Here is how you register and pass along extra paramz. but its useless IMO
+
+# ------------ example MyHandler.initialize()
+def initialize(self, db, some_config):
+        self.db = db
+        self.some_config = some_config
+
+# ------------ setup Tornado
+# when creating the App you pass those.
+app = tweb.Application([ (r"/", MyHandler, dict(db=db, some_config="my_config_value"))])
+
+
+
+# we know whats a bad idea already: New db login/connection per request.
+
+👍 You could ask the __connection pool manager__ for a db connection in initialize
+👍 Alternatively, the models could do the same upon need.
+👍 In python/tornado synchorouns setup. the pool manager might just manage 1 connection per pid. renew it as needed.
+and then you can have multiple pids, nginx in front of it, or ELB ...
+
+
+- initialize() method is invoked before the actual request handler methods (like get, post, etc.) are called.
+- The parameters received by initialize are specified in the routes setup file and passed along.
+👎 these params are just not very useful. IMO dont use them. Tornado devs put it in there in case someone wants it,
+but connection pool needs a better lifecycle management.
+
+👎 some ppl pass config/paramz from python's main to this. stupid idea again. No reason why paramz cant be a global
+subsystem, that manages its own lifecycle. Python's module's are only ever imported once per process,
+its trivial to handle everything there. Code will be more readable. paramz when you need it. conn pool when you need it.
+instead of 8 different files passing along that 'config' word i am allergic to,
+without clarifying what is being configured, when, how, what lifecycle, by whom.
+
+
+
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------- dont implement get/post/head on base class
+
+# ---- dont do this.
+# it doesnt make sense for a route to call
+# super().get(*args, **kwargs)
+# because that implies the top level base handler implements GET. which implies GET is allowed everywhere.
+
+class IndexHandler(K4BaseHandler):
+
+    def get(self, *args, **kwargs):
+        super().get(*args, **kwargs)
+        self.write(f"Hi, your number is: {os.urandom(6).hex()}")
+
+
+# calling super makes sense on the initialize method, but not GET/POST/ ....
+
+
+
+
+
+
+
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
