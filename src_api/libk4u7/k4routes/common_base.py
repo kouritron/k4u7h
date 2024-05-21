@@ -28,32 +28,63 @@ class K4BaseHandler(tweb.RequestHandler):
         # self.set_header("Access-Control-Max-Age", "1000")
 
 
-    # ----- NOTE on implementing OPTIONS at top level
-    # its tempting but not super clean.
-    # A well behaved OPTIONS implementation would tell the client, what methods are allowed on this resource if any.
-    # Tornado base request handler already has a method called get, post, put, .... that all subclasses would inherit.
-    # but tornado internally assignes a _unimplemented and tornado can figure out if you have supplied your get/post,
-    # otherwise it will default to 405 for those calls
-    # app code would not be pretty if it meddles with those internal tornado types. but maybe alternative is worse.
 
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------- OPTIONS impl at k4base
+    # ----- NOTE on implementing OPTIONS at top level
+    # A well behaved OPTIONS implementation would tell caller, what methods are allowed on a given URI if any.
+    # Tornado base request handler already has a method called get, post, put, .... that all subclasses would inherit.
+    # but tornado internally assignes a _unimplemented thing. Tornado can figure out if you have supplied your own
+    # get/post, otherwise it will default to 405 for those calls.
+    # the cleanest soln i found for app code to figure out if subclass has supplied get/post or inherited from
+    # tornado super is using something like "self.post.__func__ is not tweb.RequestHandler.post"
     def options(self):
         """ Allow and implement HTTP OPTIONS request on all resources on this server. """
 
         # this method needs to find out what is supported by its subclass for an actual resource and construct
         # a header like this that lists them:
-        # self.set_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+        # self.set_header("Access-Control-Allow-Methods", "GET, PUT, OPTIONS")
 
         allowed_methods_list = []
 
-        for http_method in ["get", "post", "put", "delete", "head", "options"]:
-            if hasattr(self, http_method) and callable(getattr(self, http_method)):
-                allowed_methods_list.append(http_method.upper())
+        # --- check get
+        if hasattr(self, 'get') and callable(getattr(self, 'get')):
+            if self.get.__func__ is not tweb.RequestHandler.get:
+                allowed_methods_list.append("GET")
+
+        # --- check post
+        if hasattr(self, 'post') and callable(getattr(self, 'post')):
+            if self.post.__func__ is not tweb.RequestHandler.post:
+                allowed_methods_list.append("POST")
+
+        # --- check put
+        if hasattr(self, 'put') and callable(getattr(self, 'put')):
+            if self.put.__func__ is not tweb.RequestHandler.put:
+                allowed_methods_list.append("PUT")
+
+        # --- check delete
+        if hasattr(self, 'delete') and callable(getattr(self, 'delete')):
+            if self.delete.__func__ is not tweb.RequestHandler.delete:
+                allowed_methods_list.append("DELETE")
+
+        # --- check head
+        if hasattr(self, 'head') and callable(getattr(self, 'head')):
+            if self.head.__func__ is not tweb.RequestHandler.head:
+                allowed_methods_list.append("HEAD")
+
+        # --- check options
+        if hasattr(self, 'options') and callable(getattr(self, 'options')):
+            if self.options.__func__ is not tweb.RequestHandler.options:
+                allowed_methods_list.append("OPTIONS")
+
 
         allowed_methods = ", ".join(allowed_methods_list)
 
         self.set_header("Access-Control-Allow-Methods", allowed_methods)
 
-        log.dbg(f"{self.riid}|Handling [{self.request.method} {self.request.uri}] -- Allowed: {allowed_methods}")
+        log.dbg(f"{self.riid}|Handling [{self.request.method} {self.request.uri}] -- allow methods: {allowed_methods}")
 
         # OPTIONS has no content, and usually 204 is used here for OK
         self.set_status(HTTPStatus2xx.NO_CONTENT.value)
