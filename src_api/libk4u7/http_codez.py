@@ -4,7 +4,7 @@ from enum import Enum
 # SWITCHING_PROTOCOLS = 101
 
 
-class HTTPStatus2xx(Enum):
+class HTTP_2xx(Enum):
     OK = 200
     CREATED = 201
     ACCEPTED = 202
@@ -14,7 +14,7 @@ class HTTPStatus2xx(Enum):
     PARTIAL_CONTENT = 206
 
 
-class HTTPStatus3xx(Enum):
+class HTTP_3xx(Enum):
     MULTIPLE_CHOICES = 300
     MOVED_PERMANENTLY = 301
     FOUND = 302
@@ -25,7 +25,7 @@ class HTTPStatus3xx(Enum):
     PERMANENT_REDIRECT = 308
 
 
-class HTTPStatus4xx(Enum):
+class HTTP_4xx(Enum):
     BAD_REQUEST = 400
     UNAUTHORIZED = 401
     PAYMENT_REQUIRED = 402
@@ -46,7 +46,7 @@ class HTTPStatus4xx(Enum):
     EXPECTATION_FAILED = 417
 
 
-class HTTPStatus5xx(Enum):
+class HTTP_5xx(Enum):
     INTERNAL_SERVER_ERROR = 500
     NOT_IMPLEMENTED = 501
     BAD_GATEWAY = 502
@@ -58,11 +58,11 @@ class HTTPStatus5xx(Enum):
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
 def main():
-    print(HTTPStatus2xx.OK)
-    print(HTTPStatus2xx.OK.value)
-    print(HTTPStatus2xx.OK.value == 200)
-    print(HTTPStatus4xx.NOT_FOUND)
-    print(HTTPStatus4xx.NOT_FOUND.value)
+    print(HTTP_2xx.OK)
+    print(HTTP_2xx.OK.value)
+    print(HTTP_2xx.OK.value == 200)
+    print(HTTP_4xx.NOT_FOUND)
+    print(HTTP_4xx.NOT_FOUND.value)
 
 
 
