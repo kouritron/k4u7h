@@ -47,24 +47,41 @@ def main():
 
     init_3rd_party_loggers()
 
-    # ----- setup tornado app
+    # ---------------------------------------- setup tornado app
     tor_settings = {
         # Enable debug mode for better error messages, disable useless autoreload.
         "debug": True,
         "autoreload": False,
     }
 
-    exposed_routes = [
-        (r"/", k4routes.core.IndexHandler),
+    exposed_routes = []
+
+    # ---------- static routes
+    exposed_routes.extend([
         (r"/favicon\.ico", k4routes.redirections.RedirectFaviconHandler),
         (r"/static/(.*)", tweb.StaticFileHandler, {
             "path": str(paramz.STATIC_DIR_PATH)
         }),
-    ]
+    ])
 
+    # ---------- Misc
+    exposed_routes.extend([
+        (r"/", k4routes.core.IndexHandler),
+    ])
+
+    # ---------- test routes (these might become part of API later)
+    exposed_routes.extend([
+        (r"/dx_api/sha256", k4routes.dx_api.Handler_SHA256),
+        (r"/dx_api/sha3_256", k4routes.dx_api.Handler_SHA3_256),
+        (r"/dx_api/hmac_sha256", k4routes.dx_api.Handler_SHA3_256),
+        (r"/dx_api/hmac_sha3_256", k4routes.dx_api.Handler_SHA3_256),
+    ])
+
+
+    # ---------------------------------------- create app 
     k4app = tweb.Application(exposed_routes, **tor_settings)
 
-    # ----- start listening
+    # ---------------------------------------- start listening
     print('\n', flush=True)
     log.info(f"*** serve_k4.py: starting 1 proc server ...\n\n")
 
