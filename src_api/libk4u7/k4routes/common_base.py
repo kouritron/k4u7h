@@ -9,7 +9,7 @@ import time
 import tornado.web as tweb
 
 from ..logutilz import simple_log as log
-from ..http_codez import HTTPStatus2xx
+from ..http_codez import HTTP_2xx
 
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -27,6 +27,7 @@ class K4BaseHandler(tweb.RequestHandler):
         # CORS is not needed yet. maybe later.
         # self.set_header("Access-Control-Max-Age", "1000")
 
+        self.req_user_agent_claim = self.request.headers.get("User-Agent", "")
 
 
 
@@ -86,6 +87,6 @@ class K4BaseHandler(tweb.RequestHandler):
 
         log.dbg(f"{self.riid}|Handling [{self.request.method} {self.request.uri}] -- allow methods: {allowed_methods}")
 
-        # OPTIONS has no content, and usually 204 is used here for OK
-        self.set_status(HTTPStatus2xx.NO_CONTENT.value)
+        # OPTIONS has no content, and usually 204 is used here for OK instead of 200
+        self.set_status(HTTP_2xx.NO_CONTENT.value)
         self.finish()
