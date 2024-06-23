@@ -8,6 +8,10 @@
 k4u7h_bundle.js
 k4u7_bundle.js
 build_tmp/
+
+build_ui/
+build_app_image/
+
 artifacts/
 
 *gignr*
