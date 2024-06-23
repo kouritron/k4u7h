@@ -14,7 +14,7 @@ cd $REPO_ROOT
 
 
 
-python3 -m http.server 15980 --bind 127.0.0.1 --directory ./build_tmp/
+python3 -m http.server 15980 --bind 127.0.0.1 --directory ./build_ui/
 
 
 

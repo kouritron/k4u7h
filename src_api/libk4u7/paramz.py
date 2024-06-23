@@ -17,7 +17,7 @@ K4_DEFAULT_PORT = 159_80
 TORNADO_DEBUG_MODE = False
 
 REPO_ROOT_PATH = Path(sp.check_output("git rev-parse --show-toplevel", shell=True).decode().strip()).resolve()
-STATIC_DIR_PATH = (REPO_ROOT_PATH / 'build_tmp' / 'static').resolve()
+STATIC_DIR_PATH = (REPO_ROOT_PATH / 'build_ui' / 'static').resolve()
 FAVICON_PATH = (STATIC_DIR_PATH / 'favicon.ico').resolve()
 
 
