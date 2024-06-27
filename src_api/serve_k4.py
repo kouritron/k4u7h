@@ -71,10 +71,9 @@ def main():
 
     # ---------- test routes (these might become part of API later)
     exposed_routes.extend([
-        (r"/dx_api/sha256", k4routes.dx_api.Handler_SHA256),
-        (r"/dx_api/sha3_256", k4routes.dx_api.Handler_SHA3_256),
-        (r"/dx_api/hmac_sha256", k4routes.dx_api.Handler_SHA3_256),
-        (r"/dx_api/hmac_sha3_256", k4routes.dx_api.Handler_SHA3_256),
+        (r"/dx_api/sha256", k4routes.dx_api.Handler_ComputeMD),
+        (r"/dx_api/sha512", k4routes.dx_api.Handler_ComputeMD),
+        (r"/dx_api/sha3_256", k4routes.dx_api.Handler_ComputeMD),
     ])
 
 
