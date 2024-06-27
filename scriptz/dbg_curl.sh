@@ -35,12 +35,16 @@ cd $REPO_ROOT
 # curl --head http://127.0.0.1:15980/favicon.ico
 
 # curl --get --include --location http://127.0.0.1:15980/favicon.ico
-curl --get --include --location http://127.0.0.1:15980/
+# curl --get --include --location http://127.0.0.1:15980/
 
 
 
 # curl -X POST http://127.0.0.1:15980/ -H "Content-Type: application/json" --data '{"p1": "foo", "p2": "bar"}'
 
+
+curl -X POST http://127.0.0.1:15980/dx_api/sha256 -H "Content-Type: application/json" --data '{"msg": "hello world"}'
+
+# curl --get --include --location http://127.0.0.1:15980/dx_api/sha256?msg=hello+world
 
 
 
