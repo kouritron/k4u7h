@@ -24,19 +24,27 @@ class Handler_ComputeMD(K4BaseHandler):
         # careful if you support both hmac_sha256 and sha256. you might want to use initialize method,
         # and pass route_name along from where the route was registered.
 
+        result = None
+
         if req_path.endswith("dx_api/sha256"):
             hex_fp = hashlib.sha256(msg.encode('utf-8')).hexdigest()
+            result = {"msg": msg, "sha256_fp": hex_fp}
 
-        if req_path.endswith("dx_api/512"):
+        if req_path.endswith("dx_api/sha512"):
             hex_fp = hashlib.sha512(msg.encode('utf-8')).hexdigest()
+            result = {"msg": msg, "sha512_fp": hex_fp}
 
         if req_path.endswith("dx_api/sha3_256"):
             hex_fp = hashlib.sha3_256(msg.encode('utf-8')).hexdigest()
+            result = {"msg": msg, "sha3_256_fp": hex_fp}
 
-        print(hex_fp)
 
-        # ---
-        self.write({"msg": msg, "sha256_fp": hex_fp})
+        if result is None:
+            self.set_status(HTTP_4xx.NOT_FOUND.value)
+        else:
+            self.write(result)
+
+        # --- done
         self.finish()
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -52,11 +60,11 @@ class Handler_ComputeMD(K4BaseHandler):
         self.compute_msg_digest(msg)
 
     def post(self):
-
+        print('dasdsadsasa')
         msg = None
         try:
             req_body_dict = json.loads(self.request.body)
-            msg = req_body_dict.get('msg', default=None)
+            msg = req_body_dict.get('msg')
         except Exception:
             self.set_status(HTTP_4xx.BAD_REQUEST.value)
             self.write({"error": "bad request"})
