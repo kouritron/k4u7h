@@ -18,7 +18,7 @@ cd $REPO_ROOT
 # --head for HTTP HEAD method
 # --get should be same -X GET
 
-
+# -w "\n"  to always append a newline
 
 # ----------------------------------------------------------------------------------------------------------------------
 # ----------------------------------------------------------------------------------------------------------------------
@@ -42,9 +42,13 @@ cd $REPO_ROOT
 # curl -X POST http://127.0.0.1:15980/ -H "Content-Type: application/json" --data '{"p1": "foo", "p2": "bar"}'
 
 
-curl -X POST http://127.0.0.1:15980/dx_api/sha256 -H "Content-Type: application/json" --data '{"msg": "hello world"}'
+curl -i -w "\n" -X POST http://127.0.0.1:15980/dx_api/sha256 -H "Content-Type: application/json" -d '{"msg": "hello"}'
+curl -i -w "\n" -X POST http://127.0.0.1:15980/dx_api/sha512 -H "Content-Type: application/json" -d '{"msg": "hello"}'
 
-# curl --get --include --location http://127.0.0.1:15980/dx_api/sha256?msg=hello+world
+
+
+
+# curl --get -i -w "\n" http://127.0.0.1:15980/dx_api/sha256?msg=hello+world
 
 
 
