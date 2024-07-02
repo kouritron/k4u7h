@@ -1,0 +1,109 @@
+
+# this is interesting option for podman run to investigate.
+# --userns=keep-id 
+
+# when running rootless, ie podman run, root inside container is current id on the host.
+
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+
+podman run --rm -it --name bx177 --network=host                                        \
+-v /home/xk2/x1ws/gh_kouritron:/x1ws/gh_kouritron                                      \
+localhost/bx177img:latest bash
+
+
+# --- ssh restart and rjn
+
+service ssh restart
+/root/bin/rjl 
+
+
+
+
+
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# ---------------------------------------------------------------------------------------------------------- build bx177
+#!/bin/bash
+
+cd ....../devpod/
+
+
+
+podman build -t bx177img --file=bx177__dockerfile ./
+
+
+
+
+
+
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------------ old run
+
+#!/bin/bash
+
+cd
+
+# format is
+# -p host:container
+# -p 17600-17699:17600-17699 will setup 100 port fwds in ss -plnt
+# -p 0.0.0.0:2144:2144 to only use ipv4
+
+# --------------------- memory
+# from docs (https://docs.docker.com/config/containers/resource_constraints/#prevent-a-container-from-using-swap)
+# If --memory and --memory-swap are set to the same value, this prevents containers from using any swap.
+# --memory="48g" --memory-swap="48g"
+
+
+docker run --rm -d --name bx176 --network=host --memory="16g" --memory-swap="24g"         \
+-v ______abc:______abc:ro                                                                 \
+-v /home/lu/x2kk:/home/vcr/x2kk                                                           \
+-v /home/lu/x5tmp:/home/vcr/x5tmp                                                         \
+bx176img:latest bash -c "sudo service ssh restart; sleep inf"
+
+# old commands
+# sudo service ssh restart; sleep inf
+
+
+# run rjn as vcr, no reason to be root. set node version container wide.
+# no reason to do it per shell, since its so easy to drop the container and get a new one.
+
+
+# ------------------ start command.
+# this kinda worked.
+# bash -c "sudo service ssh restart; bash"
+
+# this works with -d and doesnt use up an extra tty
+# bash -c "sudo service ssh restart; cd; sleep inf"
+
+# *** Update: we could write a python program in a file that doesnt return and call it using a bash "pid 1"
+# the python program would do ssh restart for us also.
+# as well as an occasional heart beat print every 10 minutes or 1 hr ....
+
+
+
+
+
+
+
+
+
+
+

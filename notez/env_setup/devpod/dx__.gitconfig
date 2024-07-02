@@ -1,0 +1,13 @@
+# Example ~/.gitconfig
+# I was using this w/ the gh token, not user password, but ssh is better.
+# Lets just commit from outside the container, so remove SSH/gh token stuff
+# [credential "https://github.com"]
+#     username = kouritron
+#     helper = cache --timeout=864000
+[core]
+    excludesfile = /home/vcr/.gitignore_global
+    editor = "nano"
+# [user]
+#     name = kouritron
+#     email = kouritron@users.noreply.github.com
+
